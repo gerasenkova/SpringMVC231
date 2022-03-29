@@ -52,7 +52,7 @@ public String user(@PathVariable int id, Model model){
         return "redirect:/users";
     }
     //удаляем пользователя
-    @RequestMapping("/{id}")
+    @DeleteMapping("/{id}")
     public String delete(@ModelAttribute("user") User user, @PathVariable("id") int id) {
         userService.getById(id);
         userService.delete(user);

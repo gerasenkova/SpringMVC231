@@ -23,7 +23,9 @@
             <td th:text="${user.getAge()}"></td>
             <td>
                 <a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a><br>
-                <a th:href="@{/users/{id}(id=${user.getId()})}">Delete</a>
+                <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+                    <input type="submit" value="Delete"/>
+                </form>
             </td>
         </tr>
     </table>
