@@ -23,7 +23,7 @@
             <td th:text="${user.getAge()}"></td>
             <td>
                 <a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a><br>
-                <a th:href="@{/users/{id}/delete(id=${user.getId()})}">Delete</a>
+                <a th:href="@{/users/{id}(id=${user.getId()})}">Delete</a>
             </td>
         </tr>
     </table>

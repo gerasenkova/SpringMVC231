@@ -1,6 +1,5 @@
 package zadacha231.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +35,8 @@ public String user(@PathVariable int id, Model model){
 
     //создаем нового пользователя
     @PostMapping()
-    public String addUser(@ModelAttribute ("user") User user,Model model){
-        model.addAttribute("user", userService.add(user));
+    public String addUser(@ModelAttribute ("user") User user){
+        userService.saveUser(user);
         return "redirect:/users";
     }
     //переходим на страницу где изменяем пользователя
@@ -49,12 +48,13 @@ public String user(@PathVariable int id, Model model){
     //изменяем пользователя, возвращаемся к началу
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.update(user);
+        userService.updateUser(id, user);
         return "redirect:/users";
     }
     //удаляем пользователя
-    @RequestMapping("/{id}/delete")
-    public String delete(@ModelAttribute("user") User user) {
+    @RequestMapping("/{id}")
+    public String delete(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+        userService.getById(id);
         userService.delete(user);
         return "redirect:/users";
     }

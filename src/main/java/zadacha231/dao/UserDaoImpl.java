@@ -5,42 +5,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import zadacha231.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-    private final SessionFactory sessionFactory;
 
-    public UserDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<User> userList() {
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("From User");
+        TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
         return query.getResultList();
     }
 
     @Override
-    public void add(User user) {
-        sessionFactory.getCurrentSession().save(user);
+    public void saveUser(User user) {
+        entityManager.persist(user);
     }
 
     @Override
-    public void update(User user) {
-        sessionFactory.getCurrentSession().update(user);
+    public void updateUser(int id, User newUser) {
+        User oldUser = entityManager.find(User.class, newUser.getId());
+        oldUser.setName(newUser.getName());
+        oldUser.setEmail(newUser.getEmail());
+        oldUser.setAge(newUser.getAge());
     }
 
     @Override
     public void delete(User user) {
-        sessionFactory.getCurrentSession().delete(user);
+        entityManager.remove(user);
     }
 
     @Override
     public User getById(int id) {
-        String Hql = "From User where id=:id";
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(Hql).setParameter("id", id);
+        String jpql = "select u from User u where u.id=:id";
+        TypedQuery<User> query = entityManager.createQuery(jpql, User.class).setParameter("id", id);
         return query.getSingleResult();
     }
 }

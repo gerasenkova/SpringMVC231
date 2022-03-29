@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 public class ApplicationInit extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {HiberConfig.class};
+        return new Class[] {PersistenceConfig.class};
     }
 
     @Override

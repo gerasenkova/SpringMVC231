@@ -8,7 +8,7 @@ import zadacha231.model.User;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     final
     UserDao userDao;
 
@@ -24,9 +24,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public Object add(User user) {
-        userDao.add(user);
-        return null;
+    public void saveUser(User user) {
+        userDao.saveUser(user);
     }
 
     @Override
@@ -37,9 +36,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public Object update(User user) {
-        userDao.update(user);
-        return null;
+    public void updateUser(int id, User user){
+        userDao.updateUser(id, user);
     }
 
     @Override
