@@ -29,8 +29,7 @@ public class PersistenceConfig {
     }
 
     @Bean
-    //используется для создания соединения с БД. Это альтернатива DriverManager
-    //с помощью Environment передаем свойства бд для установления соединения
+
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("db.driver"));
