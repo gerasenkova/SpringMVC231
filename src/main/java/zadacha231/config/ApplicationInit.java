@@ -13,7 +13,7 @@ public class ApplicationInit extends AbstractAnnotationConfigDispatcherServletIn
     }
 
     @Override
-    protected Class<?>[] getServletConfigClasses() {
+    protected Class<?>[] getServletConfigClasses() {//Веб-конфигурации, где определяются ViewResolver'ы 
         return new Class[] {AppConfig.class};
     }
 

@@ -21,7 +21,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
 public class PersistenceConfig {
-    private final Environment env; // для того, чтобы получить свойства из property файла.
+    private final Environment env;
 
     @Autowired
     public PersistenceConfig(Environment env) {

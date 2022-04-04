@@ -1,5 +1,6 @@
 package zadacha231.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zadacha231.dao.UserDao;
@@ -9,9 +10,9 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    final
     UserDao userDao;
 
+    @Autowired
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(int id, User user){
+    public void updateUser(int id, User user) {
         userDao.updateUser(id, user);
     }
 
